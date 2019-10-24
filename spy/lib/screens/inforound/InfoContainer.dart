@@ -6,8 +6,6 @@ class InfoContainer extends StatelessWidget {
 
   InfoContainer(this._loc, this._prof);
 
-  
-
   @override
   Widget build(BuildContext context) {
     var specialTextStyle = TextStyle(

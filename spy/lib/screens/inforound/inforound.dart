@@ -24,8 +24,12 @@ class _InfoRoundState extends State<InfoRound>
   String _location = 'PlaceHolderLocation';
   String _proffesion = 'Bystander';
   int counter = 0;
+  bool _open = false;
+  bool _colorDis = false;
 
   var _alignment = Alignment.center;
+  var _margin = EdgeInsets.zero;
+  var _color;
 
   _InfoRoundState(this._totalSpies, this._totalPlayers);
 
@@ -38,18 +42,35 @@ class _InfoRoundState extends State<InfoRound>
 
   @override
   Widget build(BuildContext context) {
+    _color = (!_colorDis) ? Theme.of(context).accentColor : Theme.of(context).disabledColor;
     return Scaffold(
       body: Stack(
         children: <Widget>[
           InfoContainer(_location, _proffesion),
           AnimatedContainer(
-            duration: Duration(milliseconds: 750),
+            margin: _margin,
+            duration: Duration(milliseconds: 650),
             alignment: _alignment,
-            child: GestureDetector(
-              child: Eblur(),
-              onVerticalDragStart: (_) => _onOpenCase(),
-              onVerticalDragEnd: (_) => _onCloseCase(),
-              onVerticalDragCancel: () => _onCloseCase(),
+            child: Eblur(),
+          ),
+          Container(
+            alignment: Alignment.bottomLeft,
+            margin: EdgeInsets.all(10),
+            child: FloatingActionButton(
+              backgroundColor: _color,
+              heroTag: 'OpenCaseB',
+              onPressed: () => _onOpenCase(),
+              child: Text('Open'),
+            ),
+          ),
+          Container(
+            alignment: Alignment.bottomRight,
+            margin: EdgeInsets.all(10),
+            child: FloatingActionButton(
+              backgroundColor: _color,
+              heroTag: 'CloseCaseB',
+              onPressed: () => _onCloseCase(),
+              child: Text('Close'),
             ),
           ),
         ],
@@ -59,22 +80,33 @@ class _InfoRoundState extends State<InfoRound>
 
   void _onOpenCase()
   {
+    if (_open == true)
+      return;
+    
     setState(() {
       _location = infotable[counter].location;
       _proffesion = (infotable[counter].spy) ? 'Spy' : 'Bystander';
       _alignment = Alignment.bottomCenter;
+      _margin = EdgeInsets.only(bottom: 10);
+      _open = true;
     });
     counter++;
     if (counter == _totalPlayers)
     {
+      _colorDis = true;
       Future.delayed(Duration(seconds: 5)).whenComplete(() => Navigator.popAndPushNamed(context, RPlay));
     }
   }
 
   void _onCloseCase()
   {
+    if (_open == false)
+      return;
+
     setState(() {
       _alignment = Alignment.center;
+      _margin = EdgeInsets.zero;
+      _open = false;
     });
   }
 }
