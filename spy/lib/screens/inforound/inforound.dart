@@ -49,9 +49,6 @@ class InfoRoundState extends State<InfoRound>
               alignment: _alignment,
               child: GestureDetector(
                 child: Eblur(),
-                //onTapDown: (_) => onOpenCase(),
-                //onTapUp: (_) => onCloseCase(),
-                //onTapCancel: () => onCloseCase(),
                 onVerticalDragStart: (_) => onOpenCase(),
                 onVerticalDragEnd: (_) => onCloseCase(),
                 onVerticalDragCancel: () => onCloseCase(),

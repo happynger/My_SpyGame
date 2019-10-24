@@ -33,17 +33,26 @@ class MainMenu extends StatelessWidget {
                 'Welcome to the game of spy!',
                 style: TextStyle(fontSize: 20),
               ),
-              RaisedButton(
-                onPressed: () => _onPlayPress(context),
-                child: Text('Play', style: TextStyle(fontSize: 26),),
+              Container(
+                padding: EdgeInsets.all(50),
+                child: RaisedButton(
+                  onPressed: () => _onPlayPress(context),
+                  child: Text('Play', style: TextStyle(fontSize: 26),),
+                ),
               ),
-              RaisedButton(
-                onPressed: () => _onPressRules(context),
-                child: Text('Rules', style: TextStyle(fontSize: 26)),
+              Container(
+                padding: EdgeInsets.all(50),
+                child: RaisedButton(
+                  onPressed: () => _onPressRules(context),
+                  child: Text('Rules', style: TextStyle(fontSize: 26)),
+                ),
               ),
-              RaisedButton(
-                onPressed: () { exit(0); },
-                child: Text('Exit', style: TextStyle(fontSize: 26)),
+              Container(
+                padding: EdgeInsets.all(50),
+                child: RaisedButton(
+                  onPressed: () { exit(0); },
+                  child: Text('Exit', style: TextStyle(fontSize: 26)),
+                ),
               )
             ],
           ),
