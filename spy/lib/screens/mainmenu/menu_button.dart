@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MainMenuButton extends StatelessWidget {
-  final Function _delegate;
+  final Function() _delegate;
   final String _name;
   final double rad;
   final EdgeInsetsGeometry padding;

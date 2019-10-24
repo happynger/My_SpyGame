@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:SpyGame/screens/mainmenu/menu_button.dart';
+import 'package:SpyGame/screens/shared/sharedappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:SpyGame/app.dart';
 
@@ -8,10 +9,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Spy Game'),
-        centerTitle: true,
-      ),
+      appBar: getSharedAppbar('Spy Game'),
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[

@@ -11,10 +11,10 @@ class InfoRound extends StatefulWidget
   final int _totalPlayers;
   InfoRound(this._totalSpies, this._totalPlayers);
   @override
-  State<StatefulWidget> createState() => InfoRoundState(_totalSpies, _totalPlayers);
+  State<StatefulWidget> createState() => _InfoRoundState(_totalSpies, _totalPlayers);
 }
 
-class InfoRoundState extends State<InfoRound>
+class _InfoRoundState extends State<InfoRound>
 {
   final int _totalSpies;
   final int _totalPlayers;
@@ -27,7 +27,7 @@ class InfoRoundState extends State<InfoRound>
 
   var _alignment = Alignment.center;
 
-  InfoRoundState(this._totalSpies, this._totalPlayers);
+  _InfoRoundState(this._totalSpies, this._totalPlayers);
 
   @override
   void initState()
@@ -39,28 +39,25 @@ class InfoRoundState extends State<InfoRound>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Stack(
         children: <Widget>[
           InfoContainer(_location, _proffesion),
-          Container(
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 750),
-              alignment: _alignment,
-              child: GestureDetector(
-                child: Eblur(),
-                onVerticalDragStart: (_) => onOpenCase(),
-                onVerticalDragEnd: (_) => onCloseCase(),
-                onVerticalDragCancel: () => onCloseCase(),
-              ),
-            )
+          AnimatedContainer(
+            duration: Duration(milliseconds: 750),
+            alignment: _alignment,
+            child: GestureDetector(
+              child: Eblur(),
+              onVerticalDragStart: (_) => _onOpenCase(),
+              onVerticalDragEnd: (_) => _onCloseCase(),
+              onVerticalDragCancel: () => _onCloseCase(),
+            ),
           ),
         ],
       ),
     );
   }
 
-  void onOpenCase()
+  void _onOpenCase()
   {
     setState(() {
       _location = infotable[counter].location;
@@ -74,7 +71,7 @@ class InfoRoundState extends State<InfoRound>
     }
   }
 
-  void onCloseCase()
+  void _onCloseCase()
   {
     setState(() {
       _alignment = Alignment.center;

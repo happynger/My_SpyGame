@@ -18,7 +18,8 @@ class TextSection extends StatelessWidget {
       ),
       child: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(left: 10),
+        margin: EdgeInsets.all(3),
+        padding: EdgeInsets.all(10),
         height: 70,
         child: Text('$_text', style: Theme.of(context).textTheme.body2),
       ),

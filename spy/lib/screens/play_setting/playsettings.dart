@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:SpyGame/screens/play_setting/settingview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:SpyGame/app.dart';
@@ -15,9 +16,6 @@ class PlaySettings extends StatefulWidget
 class PlaySettingsState extends State<PlaySettings> {
   var totalplayers = 1;
   var spyplayers = 1;
-  var _counter = 0.0;
-
-  static const _Threshhold = 60.0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,42 +29,13 @@ class PlaySettingsState extends State<PlaySettings> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              child: Text('Number Of Players', style: Theme.of(context).textTheme.title),
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-            ),
-            GestureDetector(
-              child: Container(
-                width: 70,
-                height: 70,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, style: BorderStyle.solid),
-                ),
-                child: Text('$totalplayers', style: Theme.of(context).textTheme.title),
-              ),
-              onVerticalDragUpdate: (details) => updateTotalCounter(details),
-            ),
+            SettingSetter('Number Of Players', totalplayers, () => addTotalCounter(), () => subTotalCounter()),
             SizedBox(height: 50),
-            Container(
-              child: Text('Number Of Spies', style: Theme.of(context).textTheme.title),
-              margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-            ),
-            GestureDetector(
-              child: Container(
-                width: 70,
-                height: 70,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, style: BorderStyle.solid),
-                ),
-                child: Text('$spyplayers', style: Theme.of(context).textTheme.title),
-              ),
-              onVerticalDragUpdate: (details) => updateSpyCounter(details),
-            ),
+            SettingSetter('Number Of Spies', spyplayers, () => addSpyCounter(), () => subSpyCounter()),
             SizedBox(height: 50),
             RaisedButton(
               onPressed: () => onPlayPress(context),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               padding: EdgeInsets.all(20),
               child: Text('Play', style: Theme.of(context).textTheme.button),
             )
@@ -76,54 +45,48 @@ class PlaySettingsState extends State<PlaySettings> {
     );
   }
 
-  //primaryDelta is positive when it goes down and negative when goes up
-  void updateTotalCounter(DragUpdateDetails details)
+  void addTotalCounter()
   {
-    double delta = details.primaryDelta;
-    bool up = false;
     int players = totalplayers;
+    players++;
 
-    if (delta.isNegative)
-    {
-      delta = -delta;
-      up = true;
-    }
-
-    _counter += delta;
-    if (_counter >= _Threshhold)
-    {
-      _counter = 0;
-      players = (up) ? players + 1 : players - 1;
-      setState(() {
-        int _comp = max(1, spyplayers);
-        totalplayers = (players < _comp) ? _comp : players;
-      });
-    }
+    setState(() {
+      int _comp = max(1, spyplayers);
+      totalplayers = (players < _comp) ? _comp : players;
+    });
   }
 
-  void updateSpyCounter(DragUpdateDetails details)
+  void subTotalCounter()
   {
-    double delta = details.primaryDelta;
-    bool up = false;
-    int players = spyplayers;
+    int players = totalplayers;
+    players--;
 
-    if (delta.isNegative)
-    {
-      delta = -delta;
-      up = true;
-    }
-    
-    _counter += delta;
-    if (_counter >= _Threshhold)
-    {
-      _counter = 0;
-      players = (up) ? players + 1 : players - 1;
-      setState(() {
-        if (players > totalplayers)
-          players = totalplayers;
-        spyplayers = (players <= 1) ? 1 : players;
-      });
-    }
+    setState(() {
+      int _comp = max(1, spyplayers);
+      totalplayers = (players < _comp) ? _comp : players;
+    });
+  }
+
+  void addSpyCounter()
+  {
+    int players = spyplayers;
+    players++;
+
+    setState(() {
+      players = (players > totalplayers) ? totalplayers : players;
+      spyplayers = (players <= 1) ? 1 : players;
+    });
+  }
+
+  void subSpyCounter()
+  {
+    int players = spyplayers;
+    players--;
+
+    setState(() {
+      players = (players > totalplayers) ? totalplayers : players;
+      spyplayers = (players <= 1) ? 1 : players;
+    });
   }
 
   void onPlayPress(BuildContext context)
