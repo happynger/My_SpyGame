@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:SpyGame/screens/mainmenu/menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:SpyGame/app.dart';
 
@@ -8,10 +9,8 @@ class MainMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          alignment: Alignment.center,
-          child: Text('Spy Game'),
-        )
+        title: Text('Spy Game'),
+        centerTitle: true,
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -33,27 +32,9 @@ class MainMenu extends StatelessWidget {
                 'Welcome to the game of spy!',
                 style: TextStyle(fontSize: 20),
               ),
-              Container(
-                padding: EdgeInsets.all(50),
-                child: RaisedButton(
-                  onPressed: () => _onPlayPress(context),
-                  child: Text('Play', style: TextStyle(fontSize: 26),),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(50),
-                child: RaisedButton(
-                  onPressed: () => _onPressRules(context),
-                  child: Text('Rules', style: TextStyle(fontSize: 26)),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(50),
-                child: RaisedButton(
-                  onPressed: () { exit(0); },
-                  child: Text('Exit', style: TextStyle(fontSize: 26)),
-                ),
-              )
+              MainMenuButton('Play', () => _onPressPlay(context)),
+              MainMenuButton('Rules', () => _onPressRules(context)),
+              MainMenuButton('Exit', () { exit(0); })
             ],
           ),
         ], 
@@ -61,7 +42,7 @@ class MainMenu extends StatelessWidget {
     );
   }
 
-  void _onPlayPress(BuildContext context)
+  void _onPressPlay(BuildContext context)
   {
     Navigator.pushNamed(context, RPlaySettings);
   }
