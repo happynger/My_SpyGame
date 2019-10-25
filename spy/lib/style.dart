@@ -35,10 +35,6 @@ const ButtonTextStyle = TextStyle(
   color: Colors.white
 );
 
-const ButtonStyle = ButtonThemeData(
-  buttonColor: Colors.blueGrey,
-);
-
 const TimerTextStyle = TextStyle(
   fontFamily: FontNameDefault,
   fontWeight: FontWeight.w600,
@@ -60,10 +56,22 @@ const BoldTextStyle = TextStyle(
   color: Colors.black
 );
 
+var whiteButtonStyle = ButtonThemeData(
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  padding: EdgeInsets.all(20),
+  textTheme: ButtonTextTheme.normal,
+  buttonColor: Color(0xffa5b1c2),
+  height: 40.0,
+);
+
 ThemeData themeData = ThemeData(
   appBarTheme: AppBarTheme(
-    textTheme: TextTheme(title: AppBarTextStyle)
+    textTheme: TextTheme(title: AppBarTextStyle),
+    color: Color(0xffa55eea),
   ),
+  backgroundColor: Color(0xffd1d8e0),
+  canvasColor: Color(0xffd1d8e0),
+  buttonTheme: whiteButtonStyle,
   textTheme: TextTheme(
     title: TitleTextStyle,
     body1: BodyTextStyle,
@@ -72,7 +80,6 @@ ThemeData themeData = ThemeData(
     display2: TimerTextStyle,
     caption: BoldTextStyle,
   ),
-  buttonTheme: ButtonStyle,
 );
 
 const darkAppbar = AppBarTheme(
@@ -80,9 +87,11 @@ const darkAppbar = AppBarTheme(
   textTheme: TextTheme(title: AppBarTextStyle),
 );
 
-const darkButtonTheme = ButtonThemeData(
-  buttonColor: Color(0xff18dcff),
-  disabledColor: Color(0xff17c0eb),
+var darkButtonTheme = ButtonThemeData(
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  padding: EdgeInsets.all(20),
+  buttonColor: Color(0xff2bcbba),
+  disabledColor: Color(0xff4b6584),
   textTheme: ButtonTextTheme.normal,
 );
 

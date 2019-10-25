@@ -37,7 +37,7 @@ class PlaySettingsState extends State<PlaySettings> {
               onPressed: () => onPlayPress(context),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               padding: EdgeInsets.all(20),
-              child: Text('Play', style: Theme.of(context).textTheme.button),
+              child: Text('Play'),
             )
           ],
         ),

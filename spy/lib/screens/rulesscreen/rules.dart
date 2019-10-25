@@ -13,6 +13,7 @@ class Rules extends StatelessWidget {
       ),
       body: ListView(
         scrollDirection: Axis.vertical,
+        physics: BouncingScrollPhysics(),
         children: <Widget>[
           TextSection('Rules are simple.'),
           TextSection('Choose the amount of players that will participate and how many spies can be in your midst'),
